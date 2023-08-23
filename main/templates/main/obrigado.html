@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'main/links.html' %}
+    <title>Obrigado</title>
+</head>
+
+<body>
+    <h1>Obrigado!</h1>
+    <ul>
+        <li><strong>Fabricante:</strong> {{data.manufacturer}}</li>
+        <li><strong>Modelo:</strong> {{data.model}}</li>
+        <li><strong>Cor:</strong> {{data.color}}</li>
+        <li><strong>Ano:</strong> {{data.year}}</li>
+    </ul>
+</body>
+
+{% include 'main/scripts.html' %}
+
+</html>
