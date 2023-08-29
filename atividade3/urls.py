@@ -18,6 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 import main.urls as urls
+from .views import index, help
 
-
-urlpatterns = [path("admin/", admin.site.urls), path("main/", include(urls))]
+urlpatterns = [
+    path('', index, name='index'), 
+    path('help/', help, name='help'), 
+    path("admin/", admin.site.urls), 
+    path("main/", include(urls))
+]

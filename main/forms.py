@@ -1,12 +1,9 @@
 from django import forms
-
+from .models import Pet
 
 class CreateCarForm(forms.Form):
-    def validate_year(value):
-        if not value.isnumeric():
-            raise "Valor não-numérico!"
-        
-        if len(value) != 4:
+    def validate_year(value):       
+        if len(str(value)) != 4:
             raise "O ano não possui 4 dígitos!"        
         
         if int(value) < 1990 and int(value) > 2077:
@@ -25,3 +22,17 @@ class CreateCarForm(forms.Form):
     model = forms.CharField(label="Modelo", max_length=80)
     color = forms.CharField(label="Cor", max_length=50)
     year = forms.IntegerField(label="Ano", validators=[validate_year])
+
+
+class CreatePetForm(forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = ('name', 'age')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        fields = self.fields.values()
+        for field in fields:
+            field.widget.attrs.update({'class': 'form-control m-2'})
+        fields.mapping['name'].label = 'Nome'
+        fields.mapping['age'].label = 'Idade'

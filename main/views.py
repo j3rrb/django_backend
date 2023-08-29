@@ -3,7 +3,7 @@ from django.template import loader
 from django.shortcuts import render
 
 from .models import Access, Page, Topic
-from .forms import CreateCarForm
+from .forms import CreateCarForm, CreatePetForm
 
 
 def topic_view(req: HttpRequest) -> HttpResponse:
@@ -40,6 +40,19 @@ def create_car(req: HttpRequest) -> HttpResponse:
         form = CreateCarForm()
 
     return render(req, "main/create-car.html", {"form": form})
+
+
+def create_pet(req: HttpRequest) -> HttpResponse:
+    if req.method == 'POST':
+        form = CreatePetForm(req.POST)
+
+        if form.is_valid():
+            form.save()
+            return render(req, 'main/obrigado.html', {'data': form.cleaned_data})
+    else:
+        form = CreatePetForm()
+
+    return render(req, 'main/create-pet.html', {'form': form})
 
 
 def thank_you(req: HttpRequest) -> HttpResponse:
