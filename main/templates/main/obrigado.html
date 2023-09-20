@@ -1,18 +1,18 @@
 <!DOCTYPE html>
+{% extends "main/base.html" %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% include 'main/links.html' %}
     <title>Obrigado</title>
 </head>
 
 <body>
+    {% block body_block %}
     <h1>Obrigado!</h1>
     {{data}}
+    {% endblock %}
 </body>
-
-{% include 'main/scripts.html' %}
 
 </html>

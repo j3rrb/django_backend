@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+{% extends "main/base.html" %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% include 'main/links.html' %}
     <title>Criar animal de estimação</title>
 </head>
 
 <body class="container">
+    {% block body_block %}
     <form class="form" action="/main/criar-pet" method="post">
         {% csrf_token %}
         {{ form }}
@@ -18,8 +19,7 @@
             </button>
         </div>
     </form>
+    {% endblock %}
 </body>
-
-{% include 'main/scripts.html' %}
 
 </html>
