@@ -33,6 +33,6 @@ class CreatePetForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         fields = self.fields.values()
         for field in fields:
-            field.widget.attrs.update({'class': 'form-control m-2'})
+            field.widget.attrs.update({'class': 'form-control mb-2'})
         fields.mapping['name'].label = 'Nome'
         fields.mapping['age'].label = 'Idade'

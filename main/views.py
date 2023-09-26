@@ -1,9 +1,18 @@
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.http import HttpResponse, HttpRequest
 from django.template import loader
 from django.shortcuts import render
+from datetime import datetime
 
 from .models import Access, Page, Topic
 from .forms import CreateCarForm, CreatePetForm
+
+
+def index_view(req: HttpRequest) -> HttpResponse:
+    template = loader.get_template("main/inicial.html")
+
+    return HttpResponse(
+        template.render({"data": datetime.now().strftime("%m/%d/%Y, %H:%M:%S")}, req)
+    )
 
 
 def topic_view(req: HttpRequest) -> HttpResponse:
@@ -43,18 +52,21 @@ def create_car(req: HttpRequest) -> HttpResponse:
 
 
 def create_pet(req: HttpRequest) -> HttpResponse:
-    if req.method == 'POST':
+    if req.method == "POST":
         form = CreatePetForm(req.POST)
 
         if form.is_valid():
             form.save()
-            return render(req, 'main/obrigado.html', {'data': form.cleaned_data})
+            return render(req, "main/obrigado.html", {"data": form.cleaned_data})
     else:
         form = CreatePetForm()
 
-    return render(req, 'main/create-pet.html', {'form': form})
+    return render(req, "main/create-pet.html", {"form": form})
 
 
 def thank_you(req: HttpRequest) -> HttpResponse:
-    print(req.body)
     return render(req, "main/obrigado.html")
+
+
+def calculator(req: HttpRequest) -> HttpResponse:
+    return render(req, "main/calculadora.html")
