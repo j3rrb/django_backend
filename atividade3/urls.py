@@ -26,5 +26,6 @@ urlpatterns = [
     path('', index, name='index'), 
     path('help/', help, name='help'), 
     path("admin/", admin.site.urls), 
-    path("main/", include(urls))
+    path("main/", include(urls)),
+    path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
